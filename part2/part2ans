@@ -1,0 +1,34 @@
+#!/bin/bash
+add () {
+    echo $1 $2 $3;
+}
+
+info () {
+    echo $1;
+}
+
+delete () {
+    echo $1;
+}
+
+progress () {
+    echo $1;
+}
+
+if [ -n $1 ]; then
+    case $1 in
+        "add")
+            add $2 $3 $4;;
+        "info")
+            info $2;;
+        "delete")
+            delete $2;;
+        "progress")
+            progress $2;;
+        "*")
+            echo "$1 is not a valid command";;
+    esac
+else
+    echo "No command given"
+fi
+
