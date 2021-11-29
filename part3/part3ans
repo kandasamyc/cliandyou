@@ -1,0 +1,43 @@
+#!/bin/bash
+
+taskid=$(awk -F "," 'END{print $1}' todos.txt)
+
+if [ -z $taskid ]; then
+    taskid=0
+fi
+
+add () {
+    let taskid+=1
+    echo "$taskid,$1,$2,$3,todo" >> ./todos.txt
+}
+
+info () {
+    echo "All tasks"
+    echo "$(awk -F "," '{printf("|%1s|%+15s|%12s|%11s|%10s|\n", $1, $2, $3, $4, $5)}' todos.txt)"
+}
+
+delete () {
+    echo "$(awk -F "," -v taskid=$1 '{ if ($1 != taskid ) { print }}' todos.txt)" > ./todos.txt
+}
+
+progress () {
+    echo "$(awk -F "," -v taskid=$1 '{ {OFS = FS} if ( $1 == taskid && $5 == "todo" ) { $5="pending" } else if ( $1 == taskid && $5 == "pending" ) { $5="done" }; print $0}' todos.txt)" > ./todos.txt
+}
+
+if [ -n $1 ]; then
+    case $1 in
+        "add")
+            add $2 $3 $4;;
+        "info")
+            info $2;;
+        "delete")
+            delete $2;;
+        "progress")
+            progress $2;;
+        "*")
+            echo "$1 is not a valid command";;
+    esac
+else
+    echo "No command given"
+fi
+
