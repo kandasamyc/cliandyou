@@ -21,7 +21,13 @@ delete () {
 }
 
 progress () {
-    echo "$(awk -F "," -v taskid=$1 '{ {OFS = FS} if ( $1 == taskid && $5 == "todo" ) { $5="pending" } else if ( $1 == taskid && $5 == "pending" ) { $5="done" }; print $0}' todos.txt)" > ./todos.txt
+    echo "$(awk -F "," -v taskid=$1 '{ {OFS = FS} if ( $1 == taskid ) { \
+        if ($5 == "todo" ) {\
+        $5="pending" \
+        } else if ( $5 == "pending" ) {\
+        $5="done" }\
+        };\
+        print $0}' todos.txt)" > ./todos.txt
 }
 
 if [ -n $1 ]; then
@@ -29,7 +35,7 @@ if [ -n $1 ]; then
         "add")
             add $2 $3 $4;;
         "info")
-            info $2;;
+            info;;
         "delete")
             delete $2;;
         "progress")
