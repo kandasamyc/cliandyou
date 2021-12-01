@@ -1,0 +1,9 @@
+1,Get Salt,2021-12-02,shopping,todo
+2,Get Eggs,2021-12-02,shopping,todo
+3,Get Milk,2021-12-02,shopping,todo
+4,Get Bread,2021-12-02,shopping,todo
+5,Get Salt,2021-12-02,shopping,todo
+6,Get Sugar,2021-12-02,shopping,todo
+7,Finish Open Sourcery Presentation,2021-12-01,shopping,todo
+8,Start Open Sourcery Presentation,2021-12-01,shopping,todo
+9,nice,well,this is,weird.,2021-12-01,bug,todo
